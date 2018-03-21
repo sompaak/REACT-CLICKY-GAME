@@ -7,7 +7,7 @@ import "./FriendCard.css";
 
 const FriendCard = props => (
  
-    <div className="img-container">
+    <div onClick={props.clickHandler} className="img-container">
       <img className ="pics" alt="" style={{height:'200px',width:'100px'}} src={props.image} />
     </div>
     

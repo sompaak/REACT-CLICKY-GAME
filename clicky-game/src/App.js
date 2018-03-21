@@ -6,17 +6,9 @@ import FriendCard from "./components/FriendCard";
 import friends from "./friends.json";
 
 
-var random = function(){
 
 
-  for (var i =0; i< friends.length; i++){
-   friends = friends[Math.floor(Math.random() * friends[i].length)];
 
-  }
-}
-
-
-random()
 
 class App extends React.Component {
 
@@ -24,14 +16,38 @@ class App extends React.Component {
     friends: friends
    };
 
+randomizer(){
+  let images = [],
+      img = [],
+      tempArr = friends.length > 1 ? friends : this.state.friends,
+      arrLength = tempArr.length
+  for (var i = 0; i < arrLength; i++){
+    let randNum = Math.floor(Math.random() * tempArr.length)
+    images.push(tempArr.splice(randNum, 1))   
+  }
+
+  for (i = 0; i<images.length; i++){
+    img.push(images[i][0])
+  }
+
+
+  console.log(img)
+  this.setState({friends:img})
+  //tempArr = friends;
+}
+  
+
   render(){
+    console.log(this.state.friends)
     return(
         <Wrapper>
         <Title />
           {
+
            this.state.friends.map(friend => (
               <FriendCard
                   image = {friend.image}
+                  clickHandler={this.randomizer.bind(this)}
               />
             ))
           }
