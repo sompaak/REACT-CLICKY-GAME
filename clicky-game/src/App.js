@@ -8,7 +8,7 @@ import friends from "./friends.json";
 class App extends React.Component {
   state = {
     friends: friends
-    
+
    };
 
   randomizer(val){
@@ -29,7 +29,7 @@ class App extends React.Component {
     this.setState({friends:img})
     //if true reset game
   }
-  // a function that uses the val param to lookup the friend
+  // a static function that uses the val param to lookup the friend
   // then check friend object for alreadyClicked field
   // check bool return true or false  
 
