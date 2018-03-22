@@ -3,6 +3,7 @@ import React from "react";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import FriendCard from "./components/FriendCard";
+import ScoreBoard from "./components/ScoreBoard"
 import friends from "./friends.json";
 
 class App extends React.Component {
@@ -10,23 +11,27 @@ class App extends React.Component {
   state = {
     friends: friends,
     score: 0,
-    losses: 0
+    topScore: 0
    };
-
-    //let alreadyClicked = false;
 
   randomizer(val){
 
     if (this.state.friends[val].clicked){
         console.log("Got you");
+        this.state.topScore = this.state.score;
         this.state.score = 0;
-        this.state.losses++;
-        console.log("losses"+this.state.losses)
+        this.state.friends[val].clicked = false;
+
     }
+
     else {
       this.state.friends[val].clicked = true;
       this.state.score++;
+
+    if(this.state.score > this.state.topScore)
+      this.state.topScore++;
     }
+
     let tmpImages = [], 
     arrLength = this.state.friends.length
 
@@ -37,16 +42,19 @@ class App extends React.Component {
     this.setState({friends:tmpImages})
 
     console.log("score" + this.state.score)
-    
-
-    //if true reset game
+     
   }
-  // a static function that uses the val param to lookup the friend
-  // then check friend object for alreadyClicked field
-  // check bool return true or false  
-
+  
   render(){
     return(
+
+      <div>
+        <ScoreBoard
+
+          score = {"score:" + this.state.score}
+          topScore = {"top score:" + this.state.topScore}
+        />
+
         <Wrapper>        
           {
            this.state.friends.map((friend, index) => (
@@ -57,6 +65,7 @@ class App extends React.Component {
             ))
           }
         </Wrapper>
+      </div>
       )
    }
 }
