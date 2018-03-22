@@ -1,10 +1,6 @@
 import React from "react";
 import "./FriendCard.css";
 
-
-
-
-
 const FriendCard = props => (
  
     <div onClick={props.clickHandler} className="img-container">

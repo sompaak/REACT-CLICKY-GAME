@@ -6,27 +6,39 @@ import FriendCard from "./components/FriendCard";
 import friends from "./friends.json";
 
 class App extends React.Component {
+  
   state = {
-    friends: friends
-
+    friends: friends,
+    score: 0,
+    losses: 0
    };
 
+    //let alreadyClicked = false;
+
   randomizer(val){
-    console.log("=============", val)
-    //if function return bool false
-    let images = [], img = [], 
-        tempArr = friends.length > 1 ? friends : this.state.friends, 
-        arrLength = tempArr.length
+
+    if (this.state.friends[val].clicked){
+        console.log("Got you");
+        this.state.score = 0;
+        this.state.losses++;
+        console.log("losses"+this.state.losses)
+    }
+    else {
+      this.state.friends[val].clicked = true;
+      this.state.score++;
+    }
+    let tmpImages = [], 
+    arrLength = this.state.friends.length
 
     for (var i = 0; i < arrLength; i++){
-      let randNum = Math.floor(Math.random() * tempArr.length)
-      images.push(tempArr.splice(randNum, 1))   
+      let randNum = Math.floor(Math.random() * this.state.friends.length)
+      tmpImages.push(this.state.friends.splice(randNum,1)[0]);
     }
-    for (i = 0; i<images.length; i++){
-      img.push(images[i][0])
-    }
+    this.setState({friends:tmpImages})
 
-    this.setState({friends:img})
+    console.log("score" + this.state.score)
+    
+
     //if true reset game
   }
   // a static function that uses the val param to lookup the friend
