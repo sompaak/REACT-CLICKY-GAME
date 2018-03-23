@@ -17,10 +17,9 @@ class App extends React.Component {
   randomizer(val){
 
     if (this.state.friends[val].clicked){
-        console.log("Got you");
-        this.state.topScore = this.state.score;
         this.state.score = 0;
         this.state.friends[val].clicked = false;
+        this.setState({friends:friends})
 
     }
 
@@ -40,9 +39,6 @@ class App extends React.Component {
       tmpImages.push(this.state.friends.splice(randNum,1)[0]);
     }
     this.setState({friends:tmpImages})
-
-    console.log("score" + this.state.score)
-     
   }
   
   render(){

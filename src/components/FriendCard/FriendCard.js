@@ -3,11 +3,21 @@ import "./FriendCard.css";
 
 const FriendCard = props => (
 
-	
- 
-    <div onClick={props.clickHandler} className="img-container">
-      <img className ="pics" alt="" style={{height:'200px',width:'100px'}} src={props.image} />
-    </div>
+ <div>
+    
+    <div className ="row">
+
+    	<div className = "col-md-3"></div>
+    	<div className = "col-md-6">
+
+		    <div onClick={props.clickHandler} className="img-container">
+		      <img className ="pics" style={{height:'300px',width:'200px'}} src={props.image} />
+		    </div>
+		</div>
+		<div className = "col-md-3"></div>
+	</div>
+
+ </div>
     
 );
 
